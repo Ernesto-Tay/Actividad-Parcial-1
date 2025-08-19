@@ -1,14 +1,12 @@
-estudiantes = {}
-class Estudiante:
-    def __init__(self,Carnet,Nombre,Carrera):
-        self.Carnet = Carnet
-        self.Nombre = Nombre
-        self.Carrera = Carrera
-        self.Actividades = {}
+class Actividades:
+    def __init__(self):
+        self.actividades  = {}
 
 class Actividad:
-    def __init__(self,Nombre,Fecha,Categoria,prioridad):
+    def __init__(self,ID,Nombre,Fecha):
+        self.ID = ID
         self.Nombre = Nombre
         self.Fecha = Fecha
-        self.Categoria = Categoria
-        self.prioridad = prioridad
+        self.Categoria = ""
+        self.prioridad = ""
+
