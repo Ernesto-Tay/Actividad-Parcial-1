@@ -2,6 +2,9 @@ class Actividades:
     def __init__(self):
         self.actividades  = {}
 
+    def buscar_por_palabra(self):
+        palabra=input("Ingrese palabra para buscar actividad:")
+
 class Actividad:
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         self.ID = ID
@@ -36,4 +39,3 @@ class Evento(Actividad):
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
         self.categoria = "Evento"
-
