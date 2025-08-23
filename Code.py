@@ -59,4 +59,4 @@ while True:
             print("Saliendo del programa...")
             break
         case _:
-            print("Opcion no valida..")
+            print("Opcion no valida...")
