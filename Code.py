@@ -100,20 +100,55 @@ def main():
     gestor_actividades = Actividades()
 
     while True:
-        print("\n------- Menú de Actividades ------")
-        print("1. ---Agregar nueva actividad---")
-        print("2. ---Listar actividades---")
-        print("3. ---Salir---")
+        print("\n-------MENU DE GESTION DE ACTIVIDADES PERSONALES ------")
+        print(f"1. ---AGREGAR NUEVA ACTIVIDAD CON FECHA, CATEGORIA Y PRIORIDAD---")
+        print(f"2. ---Listar actividades POR: DIA, SEMANA O CATEGORIA---")
+        print(f"3. ---BUSCAR POR PALABRAS CLAVE---")
+        print(f"4. ---ELIMINAR ACTIVIDADES PASADAS---")
+        print(f"5. ---Salir---")
         opcion = input("Elige una opción(1-3): ")
 
-        # Usa 'match case' para manejar las opciones del menú.
+        # usamos match case para hacer nuestro codigo más ordnado para evitar usar
+        # condicionales if-else
         match opcion:
             case '1':
-                # Solicita los datos de la nueva actividad.
-                ID = input("ID de la actividad: ")
+                # Solicita los datos para agregar la nueva actividad
+                ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
                 if ID in gestor_actividades.actividades:
-                    print("❌ El ID ya existe. Por favor, intenta con uno diferente.")
+                    print("--- El ID ya existe. Por favor, intente un ID diferente---")
                     continue
+                nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ")
+                fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+                hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+                prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
+                curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
+
+                categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
+                nueva_actividad = None
+                # una variable a la cual se le asigna 'none' es porque es una varible
+                # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
+                # error en el codigo, se inicializa de esta manera
+
+
+                # utilizamos estructura 'match case' para crear la subclase correcta
+                # anteriormente ya creamos todas las subclases de las distintas actividades que
+                # el usuario puede crear cuando escoge alguna en especifico
+                # cuando el usuario eliga una, los parametros que solicitamos, seran
+                # agregados a la padre y luego esta ira heredando a quien corresponda clase correcta sin afectar las demas
+                match categoria_opcion:
+                    case 'clase':
+                        nueva_actividad = Clase(ID, nombre, fecha, hora, prioridad, curso)
+                    case 'examen':
+                        nueva_actividad = Examen(ID, nombre, fecha, hora, prioridad, curso)
+                    case 'tarea':
+                        nueva_actividad = Tarea(ID, nombre, fecha, hora, prioridad, curso)
+                    case 'reunion':
+                        nueva_actividad = Reunion(ID, nombre, fecha, hora, prioridad, curso)
+                    case 'evento':
+                        nueva_actividad = Evento(ID, nombre, fecha, hora, prioridad, curso)
+                    case _:
+                        print("----------CATEGORIA NO VALIDA----------")
+
 
 
 
