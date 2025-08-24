@@ -98,7 +98,10 @@ class Evento(Actividad):
 # Función principal para la interacción del usuario.
 def main():
     gestor_actividades = Actividades()
+    #inicio del ciclo para que no acabe y el menu salga una tras otra vez
+    # esto sirve para que el programa siga funcionando hasta que el usuario eleiga salir del programa
 
+    '''
     while True:
         print("\n-------MENU DE GESTION DE ACTIVIDADES PERSONALES ------")
         print(f"1. ---AGREGAR NUEVA ACTIVIDAD CON FECHA, CATEGORIA Y PRIORIDAD---")
@@ -107,9 +110,10 @@ def main():
         print(f"4. ---ELIMINAR ACTIVIDADES PASADAS---")
         print(f"5. ---Salir---")
         opcion = input("Elige una opción(1-3): ")
+    '''
 
         # usamos match case para hacer nuestro codigo más ordnado para evitar usar
-        # condicionales if-else
+        # condicionales if-else y evitar tener problemas de identaciones
         match opcion:
             case '1':
                 # Solicita los datos para agregar la nueva actividad
@@ -147,9 +151,26 @@ def main():
                     case 'evento':
                         nueva_actividad = Evento(ID, nombre, fecha, hora, prioridad, curso)
                     case _:
-                        print("----------CATEGORIA NO VALIDA----------")
+                        print("----------CATEGORIA DE ACTIVIDAD NO VALIDA----------")
+                        print("----------UNICAMENTE EXISTEN (CLASE-EXAMEN-TAREA-REUNION-EVENTO)----------")
+                if nueva_actividad:
+                            gestor_actividades.agregar_actividad(nueva_actividad)
 
-
+            case '2':
+                # opcion 2, listar actividades guardadas
+                tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+                valor = ""
+                if tipo_filtro == 'categoria':
+                    valor = input("Introduce la categoría para buscar: ")
+                gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+                print(gestor_actividades.listar_por_filtro(tipo_filtro,valor))
+                '''
+                El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
+                que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
+                En resumen es una manera de enlistar unicamente las actividades que el usuario desee
+                enlistando LAS ACTIVIDADES GUARDADOS EN EL DICCIONARIO PRO: examenes, tareas, reuniones, eventos unicamente 
+                los que el quiera sin necesidad de desplegar todas y que sea desordenado
+                '''
 
 
 
