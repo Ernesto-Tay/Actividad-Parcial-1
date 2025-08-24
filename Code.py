@@ -1,6 +1,9 @@
 #clase para crear una actividad
 #o varias actividades
 
+#exportacion de las librerias para la manipulacion del tiempo
+
+from datetime import datetime
 class Actividades:
     def __init__(self):
         self.actividades  = {}
@@ -11,10 +14,22 @@ class Actividades:
         print(f"---ACTIVIDAD {actividad.ID} con ID: {actividad.ID}---")
 
     def listar_por_filtro(self,tipo_filtro, valor=""):
-'''
-este metodo de la clase actividades se basa en un filtro
-(día, semana o categoria)
-'''
+        resultados = []
+        hoy = datetime.now()
+
+        #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
+        if tipo_filtro == "dia":
+            # aqui filtramos por el dia actual
+            for actividad in self.actividades.values():
+                if actividad.fecha_completa.date() == hoy.date():
+                    resultados.append(actividad)
+        elif tipo_filtro == "semana":
+            # aqui filtramos por semana actual
+            for actividad in self.actividades.value():
+                #aqui comparamos el numero de semana ISO y el año para la coincidencia
+                if (actividad.fecha_completa)
+
+
 
 
 class Actividad:
