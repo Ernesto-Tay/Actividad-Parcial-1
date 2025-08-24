@@ -1,7 +1,30 @@
+from datetime import datetime
 class Actividades:
     def __init__(self):
         self.actividades  = {}
 
+    def eliminar_actividades_pasada(self):
+        fecha_actual= datetime.now()
+        actividades_pasadas= []
+
+        for actividad in self.actividades.values():
+            if actividad.fecha < fecha_actual:
+                actividades_pasadas.append(actividad)
+        if not actividades_pasadas:
+            print("No tienes actividades pasadas para eliminar:")
+
+        print("---ACTIVIDADES PASADAS---")
+        for actividades in actividades_pasadas:
+            print(actividades)
+
+        opcion= input("Dese eliminar todas las actividades pasadas? si/no:").lower()
+        match opcion:
+            case "si":
+                for activi in actividades_pasadas:
+                    def self.actividades[activi.ID]
+                print(f"Se eliminaron {len(actividades_pasadas)} actividades pasadas")
+            case _:
+                print("No se elimino ninguna actividad.")
 class Actividad:
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         self.ID = ID
