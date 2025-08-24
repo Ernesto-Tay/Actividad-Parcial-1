@@ -4,6 +4,17 @@ class Actividades:
 
     def buscar_por_palabra(self):
         palabra=input("Ingrese palabra para buscar actividad:")
+        resultado= []
+        for actividad in self.actividades.values():
+            if palabra in actividad.nombre.lower() or palabra in actividad.curso.lower():
+                resultado.append(actividad)
+        if resultado:
+            print(f"Resultados de la palabra {palabra}")
+            for acti in resultado:
+                print(acti)
+        else:
+            print("No pudimos encontrar resultados :(...")
+
 
 class Actividad:
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
