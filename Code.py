@@ -1,6 +1,21 @@
+#clase para crear una actividad
+#o varias actividades
+
 class Actividades:
     def __init__(self):
         self.actividades  = {}
+
+    def agregar_activiad(self,actividad):
+        #agregaremos una nueva actividad al diccionario
+        self.actividades[actividad.ID] = actividad
+        print(f"---ACTIVIDAD {actividad.ID} con ID: {actividad.ID}---")
+
+    def listar_por_filtro(self,tipo_filtro, valor=""):
+'''
+este metodo de la clase actividades se basa en un filtro
+(día, semana o categoria)
+'''
+
 
 class Actividad:
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
@@ -36,4 +51,6 @@ class Evento(Actividad):
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
         self.categoria = "Evento"
+
+
 
