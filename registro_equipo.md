@@ -28,9 +28,7 @@ programa (clases, sub-claves,diccionario,etc.)
 - Se crearon las funciones para agregar, eliminar y listar actividades.
 - Se realizaron pruebas iniciales de las funciones para asegurarse de que los métodos 
 funcionen correctamente.
-- Se documentó la estructura de las clases y funciones para facilitar el seguimiento del proyecto.
-- Se identificaron posibles mejoras o ajustes necesarios para las siguientes semanas.
--Integración parcial de las funcionalidades en el repositorio del proyecto.
+-Integración de las funcionalidades ( en ramas) en el repositorio del proyecto.
 
 #Día 4(24/08/2025)
 **Decisiones tomada**
