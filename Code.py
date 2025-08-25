@@ -157,7 +157,7 @@ def menu():
 
 while True:
     menu()
-    opcion= input(Fore.YELLOW + "Ingrese una opcion:")
+    opcion= input(Fore.YELLOW +"Ingrese una opcion:")
     match opcion:
         case "1":
             print(Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
