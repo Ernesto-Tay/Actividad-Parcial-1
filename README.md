@@ -53,5 +53,10 @@ De esta manera la opcion 1 ddel menu del codigo ya esta completa.
 6. OPCION 5:
    El usuario ingresa unicamnte el número "5" y esta sale del programa y termina como tal el sistema de Gestion de Actividades Universitarias.
 
+ROLES (Créditos):
+Lidér Técnico: Pablo Quijivix.
+Responsable de pruebas y manejo de errores: Jorge Ernesto Tay. 
+Encargado de interfaz de usuario y flujo: Jackelin Vásquez. 
+Gestor de documentación y repositorio: Jackelin Vásquez, Jorge Ernesto Tay, Pablo Quijivix.
 
 
