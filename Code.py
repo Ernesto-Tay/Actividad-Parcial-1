@@ -84,7 +84,7 @@ class Actividades:
         for actividad in self.actividades.values():
             # Convertir fecha de la actividad a datetime
             try:
-                fecha_actividad = actividad.fecha_completa()
+                fecha_actividad = actividad.fecha_completa
             except ValueError:
                 print(f"Formato de fecha inválido en la actividad {actividad.ID}")
                 continue
