@@ -26,7 +26,7 @@ class Actividades:
     def mostrar_todo(self):
         print("\n"+"-"*15+" LISTA DE ACTIVIDADES "+"-"*15)
         for id, actividad in self.actividades.items():
-            print(f"ID: {id}".ljust(10) + f"Nombre: {actividad.nombre}".ljust(20) + f"Fecha: {actividad.fecha}".ljust(15) + f"Hora: {actividad.hora}".ljust(20) + f"Prioridad: {actividad.prioridad}".ljust(20) + f"Curso: {actividad.curso}".ljust(20) + f"".ljust(20))
+            print(f"ID: {id}".ljust(20) + f"Nombre: {actividad.nombre}".ljust(25) + f"Fecha: {actividad.fecha}".ljust(25) + f"Hora: {actividad.hora}".ljust(20) + f"Prioridad: {actividad.prioridad}".ljust(20) + f"Curso: {actividad.curso}".ljust(20) + f"".ljust(20))
 
     def listar_por_filtro(self,tipo_filtro, valor=""):
         resultados = []
