@@ -23,6 +23,10 @@ class Actividades:
         self.actividades[actividad.ID] = actividad
         print(f"---ACTIVIDAD {actividad.ID} con ID: {actividad.ID}---")
 
+    def mostrar_todo(self):
+        print("\n"+"-"*15+" LISTA DE ACTIVIDADES "+"-"*15)
+        for id, actividad in self.actividades.items():
+            print(f"ID: {id}".ljust(10) + f"Nombre: {actividad.nombre}".ljust(20) + f"Fecha: {actividad.fecha}".ljust(15) + f"Hora: {actividad.hora}".ljust(20) + f"Prioridad: {actividad.prioridad}".ljust(20) + f"Curso: {actividad.curso}".ljust(20) + f"".ljust(20))
 
     def listar_por_filtro(self,tipo_filtro, valor=""):
         resultados = []
@@ -49,14 +53,14 @@ class Actividades:
                 if actividad.categoria.lower() == valor.lower():
                     resultados.append(actividad)
         else:
-            print(f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
+            print(Fore.RED + f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
             return
 
         ''' aqui estamos mostrando los resultados si se encuentran 
         dentro de nuestro diccionario de'''
 
         if resultados:
-            print(f"\n---ACTIVIDADES FILTRADAS POR '{tipo_filtro}' ---")
+            print(Fore.YELLOW+f"\n---ACTIVIDADES FILTRADAS POR '{tipo_filtro}' ---")
             for actividad in resultados:
                 print(actividad)
         else:
@@ -169,55 +173,63 @@ while True:
     opcion= input(Fore.YELLOW +"Ingrese una opción: ")
     match opcion:
         case "1":
-            print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
-            # Solicita los datos para agregar la nueva actividad
-            ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
-            if ID in gestor_actividades.actividades.keys():
-                print("--- El ID ya existe. Por favor, intente un ID diferente---")
-                continue
-            elif not ID.isnumeric():
-                print("--- La ID solo puede conterer números ---")
-                continue
-            nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
-            fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
-            fecha_con_letra = False
-            for val in fecha.split("-"):
-                if not val.isnumeric():
-                    print("--- La fecha solo puede contener números ---")
-                    fecha_con_letra = True
-                    break
-            if fecha_con_letra:
-                continue
-            if len(str(fecha.split("-")[0])) != 4:
-                print("--- El año debe tener 4 dígitos ---")
-                continue
-            elif len(str(fecha.split("-")[1])) != 2:
-                print("--- El mes debe tener 2 dígitos ---")
-                continue
-            elif len(str(fecha.split("-")[2])) != 2:
-                print("--- El día debe tener 2 dígitos ---")
-                continue
-            hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
-            hora_con_letra = False
-            for val in hora.split(":"):
-                if not val.isnumeric():
-                    print("--- La hora solo puede contener números ---")
-                    hora_con_letra = True
-                    break
-            if hora_con_letra:
-                continue
-            if len(str(hora.split(":")[0])) != 2:
-                print("--- La hora debe tener 2 dígitos")
-                continue
-            elif len(str(hora.split(":")[1])) != 2:
-                print("--- Los minutos deben tener 2 dígitos ---")
-                continue
-            prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
-            if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
-                print("--- La prioridad debe ser alta, media o baja ---")
-            curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
+            try:
+                print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
+                # Solicita los datos para agregar la nueva actividad
+                ID = int(input(" INGRESE ID PARA LA ACTIVIDAD: "))
+                if ID in gestor_actividades.actividades.keys():
+                    print("--- El ID ya existe. Por favor, intente un ID diferente---")
+                    continue
+                nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
+                fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+                fecha_con_letra = False
+                for val in fecha.split("-"):
+                    if not val.isnumeric():
+                        print("--- La fecha solo puede contener números ---")
+                        fecha_con_letra = True
+                        break
+                if fecha_con_letra:
+                    continue
+                if len(str(fecha.split("-")[0])) != 4:
+                    print("--- El año debe tener 4 dígitos ---")
+                    continue
+                elif len(str(fecha.split("-")[1])) != 2:
+                    print("--- El mes debe tener 2 dígitos ---")
+                    continue
+                elif len(str(fecha.split("-")[2])) != 2:
+                    print("--- El día debe tener 2 dígitos ---")
+                    continue
+                hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+                hora_con_letra = False
+                for val in hora.split(":"):
+                    if not val.isnumeric():
+                        print("--- La hora solo puede contener números ---")
+                        hora_con_letra = True
+                        break
+                if hora_con_letra:
+                    continue
+                if len(str(hora.split(":")[0])) != 2:
+                    print("--- La hora debe tener 2 dígitos")
+                    continue
+                elif len(str(hora.split(":")[1])) != 2:
+                    print("--- Los minutos deben tener 2 dígitos ---")
+                    continue
+                prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
+                if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
+                    print("--- La prioridad debe ser alta, media o baja ---")
+                curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
+                categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
 
-            categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
+            except ValueError:
+                print("Ingrese valores enteros en la ID")
+                continue
+            except Exception as e:
+                print(f"Error inesperado: {e}")
+                continue
+
+
+
+            categoria_opcion = quitar_tildes(categoria_opcion)
             nueva_actividad = False
             # una variable a la cual se le asigna 'none' es porque es una varible
             # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
@@ -247,21 +259,29 @@ while True:
             if nueva_actividad:
                         gestor_actividades.agregar_actividad(nueva_actividad)
 
-
         case "2":
             if not gestor_actividades.actividades:
                 print("--- Aún no hay actividades ---")
                 continue
             print("\n" + Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
-            tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
-            tipo_filtro = quitar_tildes(tipo_filtro)
-            valor = ""
-            if tipo_filtro == 'categoria':
-                valor = input("Introduce la categoría para buscar: ")
-            gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+            print(Fore.MAGENTA + Style.BRIGHT +"1. Listar todas las actividades\n2. Listar por filtro")
+            select = input("Seleccione una opción: ")
+            match select:
+                case "1":
+                    gestor_actividades.mostrar_todo()
+
+                case "2":
+                    tipo_filtro = input(Fore.YELLOW + f"\nENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+                    tipo_filtro = quitar_tildes(tipo_filtro)
+                    valor = ""
+                    if tipo_filtro == 'categoria':
+                        valor = input(Fore.LIGHTBLUE_EX+"Introduce la categoría para buscar: ")
+                    gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+                case _:
+                    print("Opción inválida")
             '''
-            El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
+            El código de la función listar_por_filtro (opción 2) utiliza condicionales if/elif para verificar 
             que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
             En resumen es una manera de enlistar unicamente las actividades que el usuario desee
             enlistando LAS ACTIVIDADES GUARDADOS EN EL DICCIONARIO PRO: examenes, tareas, reuniones, eventos unicamente 
