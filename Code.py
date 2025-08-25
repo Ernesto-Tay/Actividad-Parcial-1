@@ -180,6 +180,10 @@ while True:
                 continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+            for val in fecha.split("-"):
+                if not val.isnumeric():
+                    print("--- La fecha solo puede contener números ---")
+                    continue
             if len(str(fecha.split("-")[0])) != 4:
                 print("--- El año debe tener 4 dígitos ---")
                 continue
@@ -190,6 +194,10 @@ while True:
                 print("--- El día debe tener 2 dígitos ---")
                 continue
             hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+            for val in hora.split(":"):
+                if not val.isnumeric():
+                    print("--- La hora solo puede contener números ---")
+                    continue
             if len(str(hora.split(":")[0])) != 2:
                 print("--- La hora debe tener 2 dígitos")
                 continue
