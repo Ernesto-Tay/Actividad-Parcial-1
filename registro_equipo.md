@@ -18,7 +18,7 @@ programa (clases, sub-claves,diccionario,etc.)
 - Se investigaron módulos a utilizar, como por ejemplo: `datetime` y `colorama`.
 - Se investigaron herramientas de GitHub, como el uso de issues, ramas y pull requests.
 **Avances**
--Creación de clases base
+- Creación de clases base
 
 #Día 3 (23/08/2025)
 **Decisiones tomadas**
