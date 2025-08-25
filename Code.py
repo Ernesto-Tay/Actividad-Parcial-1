@@ -1,7 +1,8 @@
 # clase para crear una actividad
 # o varias actividades
 # exportacion de las librerias para la manipulacion del tiempo
-
+from colorama import Fore,Style,init
+init(autoreset=True)
 from datetime import datetime
 class Actividades:
     def __init__(self):
@@ -97,7 +98,7 @@ class Actividades:
                     del self.actividades[acti.ID]
                 print(f"Se eliminaron {len(actividades_pasadas)} actividades pasadas.")
             case _:
-                print("No se eliminó ninguna actividad."
+                print("No se eliminó ninguna actividad.")
 
 
 class Actividad:
@@ -150,16 +151,16 @@ class Evento(Actividad):
 gestor_actividades = Actividades()
 
 def menu():
-    print("---MENÚ---")
-    print(f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
-    print("5.Salir.")
+    print(Fore.MAGENTA + Style.BRIGHT +"---MENÚ---")
+    print(Fore.CYAN +f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
+    print(Fore.CYAN +"5.Salir.")
 
 while True:
     menu()
-    opcion= input("Ingrese una opcion:")
+    opcion= input(Fore.YELLOW + "Ingrese una opcion:")
     match opcion:
         case "1":
-            print("---AGREGAR ACTIVIDAD---")
+            print(Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
             # Solicita los datos para agregar la nueva actividad
             ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
             if ID in gestor_actividades.actividades:
@@ -203,7 +204,7 @@ while True:
 
 
         case "2":
-            print("---LISTAR ACTIVIDADES---")
+            print(Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
             tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
             valor = ""
@@ -220,17 +221,17 @@ while True:
             '''
             
         case "3":
-            print("---BUSCAR POR PALABRAS---")
+            print(Fore.YELLOW +"---BUSCAR POR PALABRAS---")
             gestor_actividades.buscar_por_palabra()
 
 
         case "4":
-            print("---ELIMINAR ACTIVIDAD---")
+            print(Fore.YELLOW +"---ELIMINAR ACTIVIDAD---")
             gestor_actividades.eliminar_actividades_pasada()
 
         case "5":
-            print("Saliendo del programa...")
+            print(Fore.LIGHTBLUE_EX + "Saliendo del programa...")
             break
         case _:
-            print("Opcion no valida...")
+            print(Fore.RED +"Opcion no valida...")
 
