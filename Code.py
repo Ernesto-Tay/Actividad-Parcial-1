@@ -18,7 +18,6 @@ class Actividades:
         resultados = []
         hoy = datetime.now()
 
-
         #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
         if tipo_filtro == "dia":
             # aqui filtramos por el dia actual
@@ -39,7 +38,6 @@ class Actividades:
             for actividad in self.actividades.values():
                 if actividad.categoria.lower() == valor.lower():
                     resultados.append(actividad)
-
         else:
             print(f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
             return
@@ -53,7 +51,53 @@ class Actividades:
                 print(actividad)
         else:
             print(f"\n----------NO SE ENCONTRO NINGUNA ACTIVIDAD CON ESE FILTRO (NOMBRE)---------")
+        
+    
+    def buscar_por_palabra(self):
+        palabra = input("Ingrese palabra para buscar actividad: ").lower()
+        resultado = []
+        for actividad in self.actividades.values():
+            if palabra in actividad.nombre.lower() or palabra in actividad.curso.lower():
+                resultado.append(actividad)
+        if resultado:
+            print(f"Resultados de la palabra '{palabra}':")
+            for acti in resultado:
+                print(f"{acti.ID} - {acti.nombre} ({acti.categoria})")
+        else:
+            print("No pudimos encontrar resultados :(")
 
+    
+    def eliminar_actividades_pasada(self):
+        fecha_actual = datetime.now()
+        actividades_pasadas = []
+
+        for actividad in self.actividades.values():
+            # Convertir fecha de la actividad a datetime
+            try:
+                fecha_actividad = datetime.strptime(actividad.fecha, "%Y-%m-%d")
+            except ValueError:
+                print(f"Formato de fecha inválido en la actividad {actividad.ID}")
+                continue
+
+            if fecha_actividad < fecha_actual:
+                actividades_pasadas.append(actividad)
+
+        if not actividades_pasadas:
+            print("No tienes actividades pasadas para eliminar.")
+            return
+
+        print("---ACTIVIDADES PASADAS---")
+        for act in actividades_pasadas:
+            print(f"{act.ID} - {act.nombre} ({act.fecha})")
+
+        opcion = input("¿Desea eliminar todas las actividades pasadas? (si/no): ").lower()
+        match opcion:
+            case "si":
+                for acti in actividades_pasadas:
+                    del self.actividades[acti.ID]
+                print(f"Se eliminaron {len(actividades_pasadas)} actividades pasadas.")
+            case _:
+                print("No se eliminó ninguna actividad."
 
 
 class Actividad:
@@ -74,7 +118,6 @@ class Actividad:
             f"ID: {self.ID}, Nombre: {self.nombre}, Categoria: {self.categoria},"
             f"Fecha: {self.fecha_completa.strftime('%Y-%m-%d %H:%M')},"
             f"Prioridad:{self.prioridad}, Curso: {self.curso}"
-
         )
 
 
@@ -103,6 +146,7 @@ class Evento(Actividad):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
         self.categoria = "Evento"
 
+        
 gestor_actividades = Actividades()
 
 def menu():
@@ -177,14 +221,16 @@ while True:
             
         case "3":
             print("---BUSCAR POR PALABRAS---")
+            gestor_actividades.buscar_por_palabra()
 
 
         case "4":
             print("---ELIMINAR ACTIVIDAD---")
-
+            gestor_actividades.eliminar_actividades_pasada()
 
         case "5":
             print("Saliendo del programa...")
             break
         case _:
             print("Opcion no valida...")
+
