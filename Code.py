@@ -29,7 +29,7 @@ class Actividades:
         hoy = datetime.now()
 
         #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
-        if tipo_filtro == "dia":
+        if tipo_filtro == "dia" or tipo_filtro == "día":
             # aqui filtramos por el dia actual
             for actividad in self.actividades.values():
                 if actividad.fecha_completa.date() == hoy.date():
@@ -39,8 +39,8 @@ class Actividades:
             # aqui filtramos por semana actual
             for actividad in self.actividades.values():
                 #aqui comparamos el numero de semana ISO y el año para la coincidencia
-                if (actividad.fecha_completa.isocalender()[1] == hoy.isocalendar()[1] and
-                    actividad.fecha_completa.vear == hoy.year):
+                if (actividad.fecha_completa.isocalendar()[1] == hoy.isocalendar()[1] and
+                    actividad.fecha_completa.year == hoy.year):
                     resultados.append(actividad)
 
         elif tipo_filtro == "categoria":
