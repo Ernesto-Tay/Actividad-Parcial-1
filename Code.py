@@ -218,6 +218,7 @@ while True:
             curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
+            categoria_opcion = quitar_tildes(categoria_opcion)
             nueva_actividad = False
             # una variable a la cual se le asigna 'none' es porque es una varible
             # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
