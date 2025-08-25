@@ -26,6 +26,28 @@ Al usuario a la hora de ingresar al sistema se le desplegara un menu de opciones
 2. NOMBRE: el usuario debe ingresar un nombre que le quiera asignar a la actividad que esta agregando (Puede ingresar cualquier nombre que el usuario quiera).
 3. FECHA: El usuario debe ingresar la fecha que desea anclar a su actividad (ANIO, MES, DIA), esta fecha puede variar en su interpretacion segun el la actividad guardada  puede ser (fecha de entrega, fecha de examen, fecha de evento) junto con la hora de dicha actividad.
 4. HORA: el usuario debe de ingresar la hora en la que la actividad guardada se entregara o se ralizara la actividad por categoria (ya sea una CLASE, TAREA, EXAMEN, EVENTO, REUNION)
-5. PRIORIDAD: El usuario debe de ingresar la prioridad de su activida guardada
+5. PRIORIDAD: El usuario debe de ingresar la prioridad de su activida guardada  y estan pueden ser (ALTA, MEDIA, BAJA)
+6. CATEGORIA DE ACTIVIDAD: El usuario debe de elegir la categoria a la cual su actividad pertenecce, asignaandole la categoria que seria (CLASE, TAREA, EXAMEN, EVENTO, REUNION)
+
+De esta manera la opcion 1 dle menu del codigo ya esta completa.
+
+OPCION NUMERO 2 DEL MENU:
+la funcion 2 del menu realiza la siguiente accion:
+2.LISTAR ACTIVIDADES:
+Esta funcion se encarga de crear un listado de las actividades guardadas, pero no despliega todas en desorden, el usuario debe de elegir que actividades desea enlistar, seleccionando la opcion 2 y luego ingresando la categoria que desea enlistar debe de seleccionar:
+1er paso:
+2. LISTAR ACTIVIDADES:
+
+2do paso:
+INGRESAR CATEGORIA: (CLASE, TAREA, EXAMEN, EVENTO, REUNION)
+
+3RA OPCION:
+SELECIONAR: 3.Buscar por palabras.
+INGRESAR PALABRA PARA BUSCAR
+BUSCAR POR PALABRAS: La actividad de buscar por palabras realiza un accion de busqueda por una unica palabra que pueda tener realacion con el nombre con el que este guardada la actividad: 
+EJEMPLO: usuario selecciona opcion 3
+El sistema pide ingresar una palabra para buscar coincidencias:
+En consecuencia el programa imprime todas las actividades relacionadas a esa palabra.
+
 
 
