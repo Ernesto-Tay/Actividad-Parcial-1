@@ -173,55 +173,62 @@ while True:
     opcion= input(Fore.YELLOW +"Ingrese una opción: ")
     match opcion:
         case "1":
-            print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
-            # Solicita los datos para agregar la nueva actividad
-            ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
-            if ID in gestor_actividades.actividades.keys():
-                print("--- El ID ya existe. Por favor, intente un ID diferente---")
-                continue
-            elif not ID.isnumeric():
-                print("--- La ID solo puede conterer números ---")
-                continue
-            nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
-            fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
-            fecha_con_letra = False
-            for val in fecha.split("-"):
-                if not val.isnumeric():
-                    print("--- La fecha solo puede contener números ---")
-                    fecha_con_letra = True
-                    break
-            if fecha_con_letra:
-                continue
-            if len(str(fecha.split("-")[0])) != 4:
-                print("--- El año debe tener 4 dígitos ---")
-                continue
-            elif len(str(fecha.split("-")[1])) != 2:
-                print("--- El mes debe tener 2 dígitos ---")
-                continue
-            elif len(str(fecha.split("-")[2])) != 2:
-                print("--- El día debe tener 2 dígitos ---")
-                continue
-            hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
-            hora_con_letra = False
-            for val in hora.split(":"):
-                if not val.isnumeric():
-                    print("--- La hora solo puede contener números ---")
-                    hora_con_letra = True
-                    break
-            if hora_con_letra:
-                continue
-            if len(str(hora.split(":")[0])) != 2:
-                print("--- La hora debe tener 2 dígitos")
-                continue
-            elif len(str(hora.split(":")[1])) != 2:
-                print("--- Los minutos deben tener 2 dígitos ---")
-                continue
-            prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
-            if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
-                print("--- La prioridad debe ser alta, media o baja ---")
-            curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
+            try:
+                print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
+                # Solicita los datos para agregar la nueva actividad
+                ID = int(input(" INGRESE ID PARA LA ACTIVIDAD: "))
+                if ID in gestor_actividades.actividades.keys():
+                    print("--- El ID ya existe. Por favor, intente un ID diferente---")
+                    continue
+                nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
+                fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+                fecha_con_letra = False
+                for val in fecha.split("-"):
+                    if not val.isnumeric():
+                        print("--- La fecha solo puede contener números ---")
+                        fecha_con_letra = True
+                        break
+                if fecha_con_letra:
+                    continue
+                if len(str(fecha.split("-")[0])) != 4:
+                    print("--- El año debe tener 4 dígitos ---")
+                    continue
+                elif len(str(fecha.split("-")[1])) != 2:
+                    print("--- El mes debe tener 2 dígitos ---")
+                    continue
+                elif len(str(fecha.split("-")[2])) != 2:
+                    print("--- El día debe tener 2 dígitos ---")
+                    continue
+                hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+                hora_con_letra = False
+                for val in hora.split(":"):
+                    if not val.isnumeric():
+                        print("--- La hora solo puede contener números ---")
+                        hora_con_letra = True
+                        break
+                if hora_con_letra:
+                    continue
+                if len(str(hora.split(":")[0])) != 2:
+                    print("--- La hora debe tener 2 dígitos")
+                    continue
+                elif len(str(hora.split(":")[1])) != 2:
+                    print("--- Los minutos deben tener 2 dígitos ---")
+                    continue
+                prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
+                if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
+                    print("--- La prioridad debe ser alta, media o baja ---")
+                curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
+                categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
 
-            categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
+            except ValueError:
+                print("Ingrese valores enteros en la ID")
+                continue
+            except Exception as e:
+                print(f"Error inesperado: {e}")
+                continue
+
+
+
             categoria_opcion = quitar_tildes(categoria_opcion)
             nueva_actividad = False
             # una variable a la cual se le asigna 'none' es porque es una varible
