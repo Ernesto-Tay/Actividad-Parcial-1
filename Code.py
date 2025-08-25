@@ -160,16 +160,16 @@ class Evento(Actividad):
 gestor_actividades = Actividades()
 
 def menu():
-    print(Fore.MAGENTA + Style.BRIGHT +"---MENÚ---")
-    print(Fore.CYAN +f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
-    print(Fore.CYAN +"5.Salir.")
+    print("\n\n" + Fore.MAGENTA + Style.BRIGHT +"---MENÚ---")
+    print(Fore.CYAN +f"1. Agregar Actividad\n2. Listar actividades.\n3. Buscar por palabras.\n4. Eliminar actividades.")
+    print(Fore.CYAN +"5. Salir.")
 
 while True:
     menu()
     opcion= input(Fore.YELLOW +"Ingrese una opcion:")
     match opcion:
         case "1":
-            print(Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
+            print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
             # Solicita los datos para agregar la nueva actividad
             ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
             if ID in gestor_actividades.actividades.keys():
@@ -250,7 +250,7 @@ while True:
             if not gestor_actividades.actividades:
                 print("--- Aún no hay actividades ---")
                 continue
-            print(Fore.YELLOW +"---LISTAR ACTIVIDADES---")
+            print("\n" + Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
             tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
             tipo_filtro = quitar_tildes(tipo_filtro)
@@ -267,12 +267,12 @@ while True:
             '''
             
         case "3":
-            print(Fore.YELLOW +"---BUSCAR POR PALABRAS---")
+            print("\n" + Fore.YELLOW +"---BUSCAR POR PALABRAS---")
             gestor_actividades.buscar_por_palabra()
 
 
         case "4":
-            print(Fore.YELLOW +"---ELIMINAR ACTIVIDAD---")
+            print("\n" + Fore.YELLOW +"---ELIMINAR ACTIVIDAD---")
             gestor_actividades.eliminar_actividades_pasada()
 
         case "5":
