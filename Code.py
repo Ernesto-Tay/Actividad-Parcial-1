@@ -3,6 +3,15 @@
 # exportacion de las librerias para la manipulacion del tiempo
 
 from datetime import datetime
+
+#Creación de función para eliminar tildes de las palabras
+def quitar_tildes(texto):
+    reemplazos = {"á": "a", "é": "e", "í": "i", "ó": "o", "ú": "u"}
+    for acento, normal in reemplazos.items():
+        texto = texto.replace(acento, normal)
+    return texto
+
+
 class Actividades:
     def __init__(self):
         self.actividades  = {}
@@ -97,7 +106,7 @@ class Actividades:
                     del self.actividades[acti.ID]
                 print(f"Se eliminaron {len(actividades_pasadas)} actividades pasadas.")
             case _:
-                print("No se eliminó ninguna actividad."
+                print("No se eliminó ninguna actividad.")
 
 
 class Actividad:
@@ -206,6 +215,7 @@ while True:
             print("---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
             tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+            tipo_filtro = quitar_tildes(tipo_filtro)
             valor = ""
             if tipo_filtro == 'categoria':
                 valor = input("Introduce la categoría para buscar: ")
