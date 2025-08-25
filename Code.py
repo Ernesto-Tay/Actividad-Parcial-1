@@ -8,14 +8,16 @@ class Actividades:
         self.actividades  = {}
 
 
-    def agregar_activiad(self,actividad):
+    def agregar_actividad(self,actividad):
         #agregaremos una nueva actividad al diccionario
         self.actividades[actividad.ID] = actividad
         print(f"---ACTIVIDAD {actividad.ID} con ID: {actividad.ID}---")
 
+
     def listar_por_filtro(self,tipo_filtro, valor=""):
         resultados = []
         hoy = datetime.now()
+
 
         #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
         if tipo_filtro == "dia":
@@ -23,30 +25,35 @@ class Actividades:
             for actividad in self.actividades.values():
                 if actividad.fecha_completa.date() == hoy.date():
                     resultados.append(actividad)
+
         elif tipo_filtro == "semana":
             # aqui filtramos por semana actual
-            for actividad in self.actividades.value():
+            for actividad in self.actividades.values():
                 #aqui comparamos el numero de semana ISO y el año para la coincidencia
                 if (actividad.fecha_completa.isocalender()[1] == hoy.isocalendar()[1] and
-                    actividad.fecha_completa.vear == hoy.ver):
+                    actividad.fecha_completa.vear == hoy.year):
                     resultados.append(actividad)
+
         elif tipo_filtro == "categoria":
             #filtro por una categoria especifica que el usuario haya querido ingresar (puedeo ser cualquiera: tareas, examenes, etc)
             for actividad in self.actividades.values():
                 if actividad.categoria.lower() == valor.lower():
                     resultados.append(actividad)
+
         else:
             print(f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
             return
 
         ''' aqui estamos mostrando los resultados si se encuentran 
         dentro de nuestro diccionario de'''
+
         if resultados:
             print(f"\n---ACTIVIDADES FILTRADAS POR '{tipo_filtro}' ---")
             for actividad in resultados:
                 print(actividad)
         else:
             print(f"\n----------NO SE ENCONTRO NINGUNA ACTIVIDAD CON ESE FILTRO (NOMBRE)---------")
+
 
 
 class Actividad:
@@ -69,6 +76,8 @@ class Actividad:
             f"Prioridad:{self.prioridad}, Curso: {self.curso}"
 
         )
+
+
 class Clase(Actividad):
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
@@ -100,6 +109,7 @@ def menu():
     print("---MENÚ---")
     print(f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
     print("5.Salir.")
+
 while True:
     menu()
     opcion= input("Ingrese una opcion:")
@@ -118,17 +128,17 @@ while True:
             curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
-            nueva_actividad = None
+            nueva_actividad = False
             # una variable a la cual se le asigna 'none' es porque es una varible
             # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
             # error en el codigo, se inicializa de esta manera
-
 
             # utilizamos estructura 'match case' para crear la subclase correcta
             # anteriormente ya creamos todas las subclases de las distintas actividades que
             # el usuario puede crear cuando escoge alguna en especifico
             # cuando el usuario eliga una, los parametros que solicitamos, seran
             # agregados a la padre y luego esta ira heredando a quien corresponda clase correcta sin afectar las demas
+
             match categoria_opcion:
                 case 'clase':
                     nueva_actividad = Clase(ID, nombre, fecha, hora, prioridad, curso)
@@ -143,8 +153,11 @@ while True:
                 case _:
                     print("----------CATEGORIA DE ACTIVIDAD NO VALIDA----------")
                     print("----------UNICAMENTE EXISTEN (CLASE-EXAMEN-TAREA-REUNION-EVENTO)----------")
+
             if nueva_actividad:
                         gestor_actividades.agregar_actividad(nueva_actividad)
+
+
         case "2":
             print("---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
@@ -164,9 +177,11 @@ while True:
             
         case "3":
             print("---BUSCAR POR PALABRAS---")
-            
+
+
         case "4":
             print("---ELIMINAR ACTIVIDAD---")
+
 
         case "5":
             print("Saliendo del programa...")
