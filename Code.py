@@ -53,14 +53,14 @@ class Actividades:
                 if actividad.categoria.lower() == valor.lower():
                     resultados.append(actividad)
         else:
-            print(f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
+            print(Fore.RED + f"---TIPO DE FILTRO NO VALIDO (INTENTE DE NUEVO)---")
             return
 
         ''' aqui estamos mostrando los resultados si se encuentran 
         dentro de nuestro diccionario de'''
 
         if resultados:
-            print(f"\n---ACTIVIDADES FILTRADAS POR '{tipo_filtro}' ---")
+            print(Fore.YELLOW+f"\n---ACTIVIDADES FILTRADAS POR '{tipo_filtro}' ---")
             for actividad in resultados:
                 print(actividad)
         else:
@@ -265,18 +265,18 @@ while True:
                 continue
             print("\n" + Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
-            print("1. Listar todas las actividades\n2. Listar por filtro")
+            print(Fore.MAGENTA + Style.BRIGHT +"1. Listar todas las actividades\n2. Listar por filtro")
             select = input("Seleccione una opción: ")
             match select:
                 case "1":
                     gestor_actividades.mostrar_todo()
 
                 case "2":
-                    tipo_filtro = input(f"\nENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+                    tipo_filtro = input(Fore.YELLOW + f"\nENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
                     tipo_filtro = quitar_tildes(tipo_filtro)
                     valor = ""
                     if tipo_filtro == 'categoria':
-                        valor = input("Introduce la categoría para buscar: ")
+                        valor = input(Fore.LIGHTBLUE_EX+"Introduce la categoría para buscar: ")
                     gestor_actividades.listar_por_filtro(tipo_filtro, valor)
                 case _:
                     print("Opción inválida")
