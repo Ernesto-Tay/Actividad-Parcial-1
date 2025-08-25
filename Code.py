@@ -84,7 +84,7 @@ class Actividades:
         for actividad in self.actividades.values():
             # Convertir fecha de la actividad a datetime
             try:
-                fecha_actividad = datetime.strptime(actividad.fecha, "%Y-%m-%d")
+                fecha_actividad = actividad.fecha_completa()
             except ValueError:
                 print(f"Formato de fecha inválido en la actividad {actividad.ID}")
                 continue
@@ -185,7 +185,7 @@ while True:
                 if not val.isnumeric():
                     print("--- La fecha solo puede contener números ---")
                     fecha_con_letra = True
-                    continue
+                    break
             if fecha_con_letra:
                 continue
             if len(str(fecha.split("-")[0])) != 4:
@@ -203,10 +203,9 @@ while True:
                 if not val.isnumeric():
                     print("--- La hora solo puede contener números ---")
                     hora_con_letra = True
-                    continue
+                    break
             if hora_con_letra:
                 continue
-
             if len(str(hora.split(":")[0])) != 2:
                 print("--- La hora debe tener 2 dígitos")
                 continue
@@ -259,7 +258,6 @@ while True:
             if tipo_filtro == 'categoria':
                 valor = input("Introduce la categoría para buscar: ")
             gestor_actividades.listar_por_filtro(tipo_filtro, valor)
-            print(gestor_actividades.listar_por_filtro(tipo_filtro,valor))
             '''
             El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
             que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
