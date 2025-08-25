@@ -28,7 +28,7 @@ class Actividades:
         resultados = []
         hoy = datetime.now()
 
-        #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
+        #condicionales para determinar el tipo de filtro a aplicar para cada actividad agregada
         if tipo_filtro == "dia" or tipo_filtro == "día":
             # aqui filtramos por el dia actual
             for actividad in self.actividades.values():
@@ -64,7 +64,7 @@ class Actividades:
         
     
     def buscar_por_palabra(self):
-        palabra = input("Ingrese palabra para buscar actividad: ").lower()
+        palabra = input("Ingrese palabra para buscar actividad:").lower()
         resultado = []
         for actividad in self.actividades.values():
             if palabra in actividad.nombre.lower() or palabra in actividad.curso.lower():
@@ -74,7 +74,7 @@ class Actividades:
             for acti in resultado:
                 print(f"{acti.ID} - {acti.nombre} ({acti.categoria})")
         else:
-            print("No pudimos encontrar resultados :(")
+            print(Fore.RED+"No pudimos encontrar resultados :(")
 
     
     def eliminar_actividades_pasada(self):
@@ -84,16 +84,16 @@ class Actividades:
         for actividad in self.actividades.values():
             # Convertir fecha de la actividad a datetime
             try:
-                fecha_actividad = datetime.strptime(actividad.fecha, "%Y-%m-%d")
+                fecha_actividad = actividad.fecha_completa
             except ValueError:
                 print(f"Formato de fecha inválido en la actividad {actividad.ID}")
                 continue
 
-            if fecha_actividad < fecha_actual:
+            if fecha_actividad<fecha_actual:
                 actividades_pasadas.append(actividad)
 
         if not actividades_pasadas:
-            print("No tienes actividades pasadas para eliminar.")
+            print(Fore.RED+"No tienes actividades pasadas para eliminar.")
             return
 
         print("---ACTIVIDADES PASADAS---")
@@ -125,10 +125,9 @@ class Actividad:
     def __str__(self):
         "Devuelve una representacion de la actividad en formato de cadena"
         return(
-            f"\n--------DATOS DE LA ACTIVIDAD----------"
-            f"ID: {self.ID}, Nombre de la actividad: {self.nombre}, Categoria: {self.categoria},"
+            f"ID: {self.ID}, Nombre: {self.nombre}, Categoria: {self.categoria},"
             f"Fecha: {self.fecha_completa.strftime('%Y-%m-%d %H:%M')},"
-            f"Prioridad:{self.prioridad}, Curso de la actividad: {self.curso}"
+            f"Prioridad:{self.prioridad}, Curso: {self.curso}"
         )
 
 
@@ -161,32 +160,32 @@ class Evento(Actividad):
 gestor_actividades = Actividades()
 
 def menu():
-    print(Fore.MAGENTA + Style.BRIGHT +"---MENÚ---")
-    print(Fore.CYAN +f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
-    print(Fore.CYAN +"5.Salir.")
+    print("\n\n" + Fore.MAGENTA + Style.BRIGHT +"---MENÚ---")
+    print(Fore.CYAN +f"1. Agregar Actividad\n2. Listar actividades.\n3. Buscar por palabras.\n4. Eliminar actividades.")
+    print(Fore.CYAN +"5. Salir.")
 
 while True:
     menu()
-    opcion= input(Fore.YELLOW +"-----Ingrese una opcion (1-5) -----: ")
+    opcion= input(Fore.YELLOW +"Ingrese una opción: ")
     match opcion:
         case "1":
-            print(Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
+            print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
             # Solicita los datos para agregar la nueva actividad
-            ID = input(" ---INGRESE ID PARA LA ACTIVIDAD---: ")
+            ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
             if ID in gestor_actividades.actividades.keys():
-                print("--- El ID YA EXISTE, INTENTE INGRESAR UN ID VALIDO ---")
+                print("--- El ID ya existe. Por favor, intente un ID diferente---")
                 continue
             elif not ID.isnumeric():
-                print("--- EL ID SOLO PUEDE CONTENER NUMEROS ---")
+                print("--- La ID solo puede conterer números ---")
                 continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
             fecha_con_letra = False
             for val in fecha.split("-"):
                 if not val.isnumeric():
-                    print("--- LA FECHA SOLO PUEDO CONTENER NUMEROS ---")
+                    print("--- La fecha solo puede contener números ---")
                     fecha_con_letra = True
-                    continue
+                    break
             if fecha_con_letra:
                 continue
             if len(str(fecha.split("-")[0])) != 4:
@@ -202,12 +201,11 @@ while True:
             hora_con_letra = False
             for val in hora.split(":"):
                 if not val.isnumeric():
-                    print("--- LA HORA SOLO PUEDE CONTENER NUMEROS ---")
+                    print("--- La hora solo puede contener números ---")
                     hora_con_letra = True
-                    continue
+                    break
             if hora_con_letra:
                 continue
-
             if len(str(hora.split(":")[0])) != 2:
                 print("--- La hora debe tener 2 dígitos")
                 continue
@@ -215,13 +213,15 @@ while True:
                 print("--- Los minutos deben tener 2 dígitos ---")
                 continue
             prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
+            if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
+                print("--- La prioridad debe ser alta, media o baja ---")
             curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
             nueva_actividad = False
-            # A la variable de "nueva_actividad" es igual a false ya que mediante el código se ejecute
-            #  este se mantendra con un valor booleano en false para cuando se cumpla una condicion especifica
-            #  este valor cambie a true y este pueda manipularse
+            # una variable a la cual se le asigna 'none' es porque es una varible
+            # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
+            # error en el codigo, se inicializa de esta manera
 
             # utilizamos estructura 'match case' para crear la subclase correcta
             # anteriormente ya creamos todas las subclases de las distintas actividades que
@@ -252,7 +252,7 @@ while True:
             if not gestor_actividades.actividades:
                 print("--- Aún no hay actividades ---")
                 continue
-            print(Fore.YELLOW +"---LISTAR ACTIVIDADES---")
+            print("\n" + Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
             tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
             tipo_filtro = quitar_tildes(tipo_filtro)
@@ -260,7 +260,6 @@ while True:
             if tipo_filtro == 'categoria':
                 valor = input("Introduce la categoría para buscar: ")
             gestor_actividades.listar_por_filtro(tipo_filtro, valor)
-            print(gestor_actividades.listar_por_filtro(tipo_filtro,valor))
             '''
             El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
             que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
@@ -270,12 +269,12 @@ while True:
             '''
             
         case "3":
-            print(Fore.YELLOW +"---BUSCAR POR PALABRAS---")
+            print("\n" + Fore.YELLOW +"---BUSCAR POR PALABRAS---")
             gestor_actividades.buscar_por_palabra()
 
 
         case "4":
-            print(Fore.YELLOW +"---ELIMINAR ACTIVIDAD---")
+            print("\n" + Fore.YELLOW +"---ELIMINAR ACTIVIDAD---")
             gestor_actividades.eliminar_actividades_pasada()
 
         case "5":
