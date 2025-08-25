@@ -4,13 +4,13 @@ Este archivo contiene la bitácora semanal de decisiones y avances del equipo en
 
 #Día 1 (Martes 19/08/2025)
 **Decisiones tomadas:**
--Se definio que herramientas se utilizarian durante la creación del 
+- Se definio que herramientas se utilizarian durante la creación del 
 programa (clases, sub-claves,diccionario,etc.)
--Se asignaron los roles iniciales de cada miembro del equipo.
+- Se asignaron los roles iniciales de cada miembro del equipo.
 
 **Avances**
--Creación del repositorio grupal
--Reunion incial para definir tarea de cada integrante.
+- Creación del repositorio grupal
+- Reunion incial para definir tarea de cada integrante.
 
 #Día 2 (Miercoles 21/08/2025)
 **Decisiones tomadas**
