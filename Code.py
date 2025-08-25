@@ -8,6 +8,7 @@ class Actividades:
     def __init__(self):
         self.actividades  = {}
 
+
     def agregar_activiad(self,actividad):
         #agregaremos una nueva actividad al diccionario
         self.actividades[actividad.ID] = actividad
@@ -47,7 +48,6 @@ class Actividades:
                 print(actividad)
         else:
             print(f"\n----------NO SE ENCONTRO NINGUNA ACTIVIDAD CON ESE FILTRO (NOMBRE)---------")
-
 
 
 class Actividad:
@@ -94,83 +94,80 @@ class Evento(Actividad):
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
         self.categoria = "Evento"
+        
+def menu():
+    print("---MENÚ---")
+    print(f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
+    print("5.Salir.")
+while True:
+    menu()
+    opcion= input("Ingrese una opcion:")
+    match opcion:
+        case "1":
+            print("---AGREGAR ACTIVIDAD---")
+            # Solicita los datos para agregar la nueva actividad
+            ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
+            if ID in gestor_actividades.actividades:
+                print("--- El ID ya existe. Por favor, intente un ID diferente---")
+                continue
+            nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ")
+             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+             hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+             prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
+            curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
 
-# Función principal para la interacción del usuario.
-def main():
-    gestor_actividades = Actividades()
-    #inicio del ciclo para que no acabe y el menu salga una tras otra vez
-    # esto sirve para que el programa siga funcionando hasta que el usuario eleiga salir del programa
-
-    '''
-    while True:
-        print("\n-------MENU DE GESTION DE ACTIVIDADES PERSONALES ------")
-        print(f"1. ---AGREGAR NUEVA ACTIVIDAD CON FECHA, CATEGORIA Y PRIORIDAD---")
-        print(f"2. ---Listar actividades POR: DIA, SEMANA O CATEGORIA---")
-        print(f"3. ---BUSCAR POR PALABRAS CLAVE---")
-        print(f"4. ---ELIMINAR ACTIVIDADES PASADAS---")
-        print(f"5. ---Salir---")
-        opcion = input("Elige una opción(1-3): ")
-    '''
-
-        # usamos match case para hacer nuestro codigo más ordnado para evitar usar
-        # condicionales if-else y evitar tener problemas de identaciones
-        match opcion:
-            case '1':
-                # Solicita los datos para agregar la nueva actividad
-                ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
-                if ID in gestor_actividades.actividades:
-                    print("--- El ID ya existe. Por favor, intente un ID diferente---")
-                    continue
-                nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ")
-                fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
-                hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
-                prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
-                curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
-
-                categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
-                nueva_actividad = None
-                # una variable a la cual se le asigna 'none' es porque es una varible
-                # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
-                # error en el codigo, se inicializa de esta manera
+            categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
+            nueva_actividad = None
+            # una variable a la cual se le asigna 'none' es porque es una varible
+            # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
+            # error en el codigo, se inicializa de esta manera
 
 
-                # utilizamos estructura 'match case' para crear la subclase correcta
-                # anteriormente ya creamos todas las subclases de las distintas actividades que
-                # el usuario puede crear cuando escoge alguna en especifico
-                # cuando el usuario eliga una, los parametros que solicitamos, seran
-                # agregados a la padre y luego esta ira heredando a quien corresponda clase correcta sin afectar las demas
-                match categoria_opcion:
-                    case 'clase':
-                        nueva_actividad = Clase(ID, nombre, fecha, hora, prioridad, curso)
-                    case 'examen':
-                        nueva_actividad = Examen(ID, nombre, fecha, hora, prioridad, curso)
-                    case 'tarea':
-                        nueva_actividad = Tarea(ID, nombre, fecha, hora, prioridad, curso)
-                    case 'reunion':
-                        nueva_actividad = Reunion(ID, nombre, fecha, hora, prioridad, curso)
-                    case 'evento':
-                        nueva_actividad = Evento(ID, nombre, fecha, hora, prioridad, curso)
-                    case _:
-                        print("----------CATEGORIA DE ACTIVIDAD NO VALIDA----------")
-                        print("----------UNICAMENTE EXISTEN (CLASE-EXAMEN-TAREA-REUNION-EVENTO)----------")
-                if nueva_actividad:
-                            gestor_actividades.agregar_actividad(nueva_actividad)
-
-            case '2':
-                # opcion 2, listar actividades guardadas
-                tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
-                valor = ""
-                if tipo_filtro == 'categoria':
-                    valor = input("Introduce la categoría para buscar: ")
-                gestor_actividades.listar_por_filtro(tipo_filtro, valor)
-                print(gestor_actividades.listar_por_filtro(tipo_filtro,valor))
-                '''
-                El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
-                que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
-                En resumen es una manera de enlistar unicamente las actividades que el usuario desee
-                enlistando LAS ACTIVIDADES GUARDADOS EN EL DICCIONARIO PRO: examenes, tareas, reuniones, eventos unicamente 
-                los que el quiera sin necesidad de desplegar todas y que sea desordenado
-                '''
-
-
-
+            # utilizamos estructura 'match case' para crear la subclase correcta
+            # anteriormente ya creamos todas las subclases de las distintas actividades que
+            # el usuario puede crear cuando escoge alguna en especifico
+            # cuando el usuario eliga una, los parametros que solicitamos, seran
+            # agregados a la padre y luego esta ira heredando a quien corresponda clase correcta sin afectar las demas
+            match categoria_opcion:
+                case 'clase':
+                    nueva_actividad = Clase(ID, nombre, fecha, hora, prioridad, curso)
+                case 'examen':
+                    nueva_actividad = Examen(ID, nombre, fecha, hora, prioridad, curso)
+                case 'tarea':
+                    nueva_actividad = Tarea(ID, nombre, fecha, hora, prioridad, curso)
+                case 'reunion':
+                    nueva_actividad = Reunion(ID, nombre, fecha, hora, prioridad, curso)
+                 case 'evento':
+                    nueva_actividad = Evento(ID, nombre, fecha, hora, prioridad, curso)
+                case _:
+                    print("----------CATEGORIA DE ACTIVIDAD NO VALIDA----------")
+                    print("----------UNICAMENTE EXISTEN (CLASE-EXAMEN-TAREA-REUNION-EVENTO)----------")
+            if nueva_actividad:
+                        gestor_actividades.agregar_actividad(nueva_actividad)
+        case "2":
+            print("---LISTAR ACTIVIDADES---")
+            # opcion 2, listar actividades guardadas
+            tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+            valor = ""
+            if tipo_filtro == 'categoria':
+                valor = input("Introduce la categoría para buscar: ")
+            gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+            print(gestor_actividades.listar_por_filtro(tipo_filtro,valor))
+            '''
+            El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
+            que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
+            En resumen es una manera de enlistar unicamente las actividades que el usuario desee
+            enlistando LAS ACTIVIDADES GUARDADOS EN EL DICCIONARIO PRO: examenes, tareas, reuniones, eventos unicamente 
+            los que el quiera sin necesidad de desplegar todas y que sea desordenado
+            '''
+            
+        case "3":
+            print("---BUSCAR POR PALABRAS---")
+            
+        case "4":
+            print("---ELIMINAR ACTIVIDAD---")
+        case "5":
+            print("Saliendo del programa...")
+            break
+        case _:
+            print("Opcion no valida...")
