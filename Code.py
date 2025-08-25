@@ -28,7 +28,7 @@ class Actividades:
         resultados = []
         hoy = datetime.now()
 
-        #condicionales para determinar el tipo de filtro a aplicar para cada activiad agregada
+        #condicionales para determinar el tipo de filtro a aplicar para cada actividad agregada
         if tipo_filtro == "dia" or tipo_filtro == "día":
             # aqui filtramos por el dia actual
             for actividad in self.actividades.values():
@@ -64,7 +64,7 @@ class Actividades:
         
     
     def buscar_por_palabra(self):
-        palabra = input("Ingrese palabra para buscar actividad: ").lower()
+        palabra = input("Ingrese palabra para buscar actividad:").lower()
         resultado = []
         for actividad in self.actividades.values():
             if palabra in actividad.nombre.lower() or palabra in actividad.curso.lower():
@@ -74,7 +74,7 @@ class Actividades:
             for acti in resultado:
                 print(f"{acti.ID} - {acti.nombre} ({acti.categoria})")
         else:
-            print("No pudimos encontrar resultados :(")
+            print(Fore.RED+"No pudimos encontrar resultados :(")
 
     
     def eliminar_actividades_pasada(self):
@@ -89,11 +89,11 @@ class Actividades:
                 print(f"Formato de fecha inválido en la actividad {actividad.ID}")
                 continue
 
-            if fecha_actividad < fecha_actual:
+            if fecha_actividad<fecha_actual:
                 actividades_pasadas.append(actividad)
 
         if not actividades_pasadas:
-            print("No tienes actividades pasadas para eliminar.")
+            print(Fore.RED+"No tienes actividades pasadas para eliminar.")
             return
 
         print("---ACTIVIDADES PASADAS---")
