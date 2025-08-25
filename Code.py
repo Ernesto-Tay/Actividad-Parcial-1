@@ -171,14 +171,29 @@ while True:
             print("---AGREGAR ACTIVIDAD---")
             # Solicita los datos para agregar la nueva actividad
             ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
-            if ID in gestor_actividades.actividades:
+            if ID in gestor_actividades.actividades.keys():
                 print("--- El ID ya existe. Por favor, intente un ID diferente---")
                 continue
-            nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ")
+            nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+            if len(str(fecha.split("-")[0])) != 4:
+                print("--- El año debe tener 4 dígitos ---")
+                continue
+            elif len(str(fecha.split("-")[1])) != 2:
+                print("--- El mes debe tener 2 dígitos ---")
+                continue
+            elif len(str(fecha.split("-")[2])) != 2:
+                print("--- El día debe tener 2 dígitos ---")
+                continue
             hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
-            prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
-            curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
+            if len(str(hora.split(":")[0])) != 2:
+                print("--- La hora debe tener 2 dígitos")
+                continue
+            elif len(str(hora.split(":")[1])) != 2:
+                print("--- Los minutos deben tener 2 dígitos ---")
+                continue
+            prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
+            curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
             nueva_actividad = False
