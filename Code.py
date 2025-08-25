@@ -13,7 +13,7 @@ class Actividades:
             for acti in resultado:
                 print(acti)
         else:
-            print("No pudimos encontrar resultados :(...")
+            print("No pudimos encontrar resultados :(....")
 
 
 class Actividad:
