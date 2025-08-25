@@ -175,6 +175,9 @@ while True:
             if ID in gestor_actividades.actividades.keys():
                 print("--- El ID ya existe. Por favor, intente un ID diferente---")
                 continue
+            elif not ID.isnumeric():
+                print("--- La ID solo puede conterer números ---")
+                continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
             if len(str(fecha.split("-")[0])) != 4:
