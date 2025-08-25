@@ -125,9 +125,10 @@ class Actividad:
     def __str__(self):
         "Devuelve una representacion de la actividad en formato de cadena"
         return(
-            f"ID: {self.ID}, Nombre: {self.nombre}, Categoria: {self.categoria},"
+            f"\n--------DATOS DE LA ACTIVIDAD----------"
+            f"ID: {self.ID}, Nombre de la actividad: {self.nombre}, Categoria: {self.categoria},"
             f"Fecha: {self.fecha_completa.strftime('%Y-%m-%d %H:%M')},"
-            f"Prioridad:{self.prioridad}, Curso: {self.curso}"
+            f"Prioridad:{self.prioridad}, Curso de la actividad: {self.curso}"
         )
 
 
@@ -166,24 +167,24 @@ def menu():
 
 while True:
     menu()
-    opcion= input(Fore.YELLOW +"Ingrese una opcion:")
+    opcion= input(Fore.YELLOW +"-----Ingrese una opcion (1-5) -----: ")
     match opcion:
         case "1":
             print(Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
             # Solicita los datos para agregar la nueva actividad
-            ID = input(" INGRESE ID PARA LA ACTIVIDAD: ")
+            ID = input(" ---INGRESE ID PARA LA ACTIVIDAD---: ")
             if ID in gestor_actividades.actividades.keys():
-                print("--- El ID ya existe. Por favor, intente un ID diferente---")
+                print("--- El ID YA EXISTE, INTENTE INGRESAR UN ID VALIDO ---")
                 continue
             elif not ID.isnumeric():
-                print("--- La ID solo puede conterer números ---")
+                print("--- EL ID SOLO PUEDE CONTENER NUMEROS ---")
                 continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
             fecha_con_letra = False
             for val in fecha.split("-"):
                 if not val.isnumeric():
-                    print("--- La fecha solo puede contener números ---")
+                    print("--- LA FECHA SOLO PUEDO CONTENER NUMEROS ---")
                     fecha_con_letra = True
                     continue
             if fecha_con_letra:
@@ -201,7 +202,7 @@ while True:
             hora_con_letra = False
             for val in hora.split(":"):
                 if not val.isnumeric():
-                    print("--- La hora solo puede contener números ---")
+                    print("--- LA HORA SOLO PUEDE CONTENER NUMEROS ---")
                     hora_con_letra = True
                     continue
             if hora_con_letra:
@@ -218,9 +219,9 @@ while True:
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
             nueva_actividad = False
-            # una variable a la cual se le asigna 'none' es porque es una varible
-            # la cual esta esperando recibir algun valor, para que esta no cause conflicto o algun
-            # error en el codigo, se inicializa de esta manera
+            # A la variable de "nueva_actividad" es igual a false ya que mediante el código se ejecute
+            #  este se mantendra con un valor booleano en false para cuando se cumpla una condicion especifica
+            #  este valor cambie a true y este pueda manipularse
 
             # utilizamos estructura 'match case' para crear la subclase correcta
             # anteriormente ya creamos todas las subclases de las distintas actividades que
