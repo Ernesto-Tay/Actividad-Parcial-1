@@ -166,7 +166,7 @@ def menu():
 
 while True:
     menu()
-    opcion= input(Fore.YELLOW +"Ingrese una opcion:")
+    opcion= input(Fore.YELLOW +"Ingrese una opción: ")
     match opcion:
         case "1":
             print("\n" + Fore.YELLOW +"---AGREGAR ACTIVIDAD---")
@@ -213,6 +213,8 @@ while True:
                 print("--- Los minutos deben tener 2 dígitos ---")
                 continue
             prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
+            if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
+                print("--- La prioridad debe ser alta, media o baja ---")
             curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
