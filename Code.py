@@ -1,7 +1,6 @@
-#clase para crear una actividad
-#o varias actividades
-
-#exportacion de las librerias para la manipulacion del tiempo
+# clase para crear una actividad
+# o varias actividades
+# exportacion de las librerias para la manipulacion del tiempo
 
 from datetime import datetime
 class Actividades:
@@ -94,7 +93,9 @@ class Evento(Actividad):
     def __init__(self,ID,nombre,fecha,hora,prioridad,curso):
         super().__init__(ID,nombre,fecha,hora,prioridad,curso)
         self.categoria = "Evento"
-        
+
+gestor_actividades = Actividades()
+
 def menu():
     print("---MENÚ---")
     print(f"1.Agrgear Actividad\n2.Listar actividades.\n3.Buscar por palabras.\n4.Eliminar actividades.")
@@ -111,9 +112,9 @@ while True:
                 print("--- El ID ya existe. Por favor, intente un ID diferente---")
                 continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ")
-             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
-             hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
-             prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
+            fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+            hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+            prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ")
             curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ")
 
             categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
@@ -137,7 +138,7 @@ while True:
                     nueva_actividad = Tarea(ID, nombre, fecha, hora, prioridad, curso)
                 case 'reunion':
                     nueva_actividad = Reunion(ID, nombre, fecha, hora, prioridad, curso)
-                 case 'evento':
+                case 'evento':
                     nueva_actividad = Evento(ID, nombre, fecha, hora, prioridad, curso)
                 case _:
                     print("----------CATEGORIA DE ACTIVIDAD NO VALIDA----------")
@@ -166,6 +167,7 @@ while True:
             
         case "4":
             print("---ELIMINAR ACTIVIDAD---")
+
         case "5":
             print("Saliendo del programa...")
             break
