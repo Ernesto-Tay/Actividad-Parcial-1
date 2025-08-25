@@ -180,10 +180,14 @@ while True:
                 continue
             nombre = input("-----INGRESE NOMBRE DE LA ACTIVIDAD: ").capitalize()
             fecha = input("-----INGRESE FECHA DE LA ACTIVIDAD (YYYY-MM-DD): ")
+            fecha_con_letra = False
             for val in fecha.split("-"):
                 if not val.isnumeric():
                     print("--- La fecha solo puede contener números ---")
+                    fecha_con_letra = True
                     continue
+            if fecha_con_letra:
+                continue
             if len(str(fecha.split("-")[0])) != 4:
                 print("--- El año debe tener 4 dígitos ---")
                 continue
@@ -194,10 +198,15 @@ while True:
                 print("--- El día debe tener 2 dígitos ---")
                 continue
             hora = input("-----INGRESE HORA DE LA ACTIVIDAD (HH:MM): ")
+            hora_con_letra = False
             for val in hora.split(":"):
                 if not val.isnumeric():
                     print("--- La hora solo puede contener números ---")
+                    hora_con_letra = True
                     continue
+            if hora_con_letra:
+                continue
+
             if len(str(hora.split(":")[0])) != 2:
                 print("--- La hora debe tener 2 dígitos")
                 continue
@@ -239,6 +248,9 @@ while True:
 
 
         case "2":
+            if not gestor_actividades.actividades:
+                print("--- Aún no hay actividades ---")
+                continue
             print(Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
             tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
