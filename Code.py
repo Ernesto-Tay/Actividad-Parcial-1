@@ -23,6 +23,10 @@ class Actividades:
         self.actividades[actividad.ID] = actividad
         print(f"---ACTIVIDAD {actividad.ID} con ID: {actividad.ID}---")
 
+    def mostrar_todo(self):
+        print("\n"+"-"*15+" LISTA DE ACTIVIDADES "+"-"*15)
+        for id, actividad in self.actividades.items():
+            print(f"ID: {id}".ljust(10) + f"Nombre: {actividad.nombre}".ljust(20) + f"Fecha: {actividad.fecha}".ljust(15) + f"Hora: {actividad.hora}".ljust(20) + f"Prioridad: {actividad.prioridad}".ljust(20) + f"Curso: {actividad.curso}".ljust(20) + f"".ljust(20))
 
     def listar_por_filtro(self,tipo_filtro, valor=""):
         resultados = []
@@ -248,21 +252,29 @@ while True:
             if nueva_actividad:
                         gestor_actividades.agregar_actividad(nueva_actividad)
 
-
         case "2":
             if not gestor_actividades.actividades:
                 print("--- Aún no hay actividades ---")
                 continue
             print("\n" + Fore.YELLOW +"---LISTAR ACTIVIDADES---")
             # opcion 2, listar actividades guardadas
-            tipo_filtro = input(f"ENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
-            tipo_filtro = quitar_tildes(tipo_filtro)
-            valor = ""
-            if tipo_filtro == 'categoria':
-                valor = input("Introduce la categoría para buscar: ")
-            gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+            print("1. Listar todas las actividades\n2. Listar por filtro")
+            select = input("Seleccione una opción: ")
+            match select:
+                case "1":
+                    gestor_actividades.mostrar_todo()
+
+                case "2":
+                    tipo_filtro = input(f"\nENLISTAR ACTIVIDADES EXISTENTES POR FILTRO: (dia/semana/categoria): ").lower()
+                    tipo_filtro = quitar_tildes(tipo_filtro)
+                    valor = ""
+                    if tipo_filtro == 'categoria':
+                        valor = input("Introduce la categoría para buscar: ")
+                    gestor_actividades.listar_por_filtro(tipo_filtro, valor)
+                case _:
+                    print("Opción inválida")
             '''
-            El código de la función listar_por_filtro utiliza condicionales if/elif para verificar 
+            El código de la función listar_por_filtro (opción 2) utiliza condicionales if/elif para verificar 
             que filtro se ha seleccionado y luego recorre el diccionario de actividades para encontrar las coincidencias y mostrarlas
             En resumen es una manera de enlistar unicamente las actividades que el usuario desee
             enlistando LAS ACTIVIDADES GUARDADOS EN EL DICCIONARIO PRO: examenes, tareas, reuniones, eventos unicamente 
