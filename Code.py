@@ -17,7 +17,7 @@ class Actividades:
         for actividades in actividades_pasadas:
             print(actividades)
 
-        opcion= input("Dese eliminar todas las actividades pasadas? si/no:").lower()
+        opcion= input("Dese eliminar todas las actividades pasadas? (si/no:)").lower()
         match opcion:
             case "si":
                 for activi in actividades_pasadas:
