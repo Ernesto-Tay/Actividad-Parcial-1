@@ -217,6 +217,7 @@ while True:
                 prioridad = input("----- INGRESE LA PRIORIDAD (Alta/Media/Baja): ").capitalize()
                 if not any(prioridad == tipo for tipo in ["Alta", "Media", "Baja"]):
                     print("--- La prioridad debe ser alta, media o baja ---")
+                    continue
                 curso = input("----- INGRESE EL CURSO AL QUE PERTENECE LA ACTIVIDAD: ").capitalize()
                 categoria_opcion = input("Categoría (Clase, Examen, Tarea, Reunion, Evento): ").lower()
 
